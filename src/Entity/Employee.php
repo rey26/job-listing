@@ -19,19 +19,19 @@ class Employee
     public function __construct(
         string $id,
         string $name,
-        ?string $username,
+        ?string $surname,
         string $email,
         string $photoUrl,
         ?string $phone,
-        ?string $linkedIn
+        ?string $linkedin
     ) {
         $this->id = $id;
         $this->name = $name;
-        $this->username = $username;
+        $this->surname = $surname;
         $this->email = $email;
         $this->photoUrl = $photoUrl;
         $this->phone = $phone;
-        $this->linkedin = $linkedIn;
+        $this->linkedin = $linkedin;
     }
 
     public function getId(): string
