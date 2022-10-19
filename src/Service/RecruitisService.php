@@ -6,6 +6,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * A service retrieving data from external (Recruitis) API
+ * @package App\Service
  */
 class RecruitisService
 {
@@ -19,9 +20,11 @@ class RecruitisService
         ]);
     }
 
-    public function retrieveJobs()
+    public function retrieveJobs(): array
     {
         $response = $this->client->request('GET', 'api2/jobs');
-        dd($response->getContent());
+        $jobData = json_decode($response->getContent(), true);
+
+        return $jobData;
     }
 }

@@ -15,3 +15,4 @@
 - implement missing properties for the Job entity (secured_id, access_state, stats, fte, filterlist, detail, addresses)
 - use enums from API (e.g. Salary unit, Salary currency)
 - add unit tests for all entities
+- add more integration tests
