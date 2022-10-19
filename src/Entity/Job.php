@@ -15,7 +15,7 @@ class Job
     private bool $active;
     private string $title;
     private string $description;
-    private int $closedDuration;
+    private ?int $closedDuration;
     private string $lastUpdate;
     private string $dateCreated;
     private array $workFields;
@@ -32,7 +32,7 @@ class Job
         bool $active,
         string $title,
         string $description,
-        int $closedDuration,
+        ?int $closedDuration,
         string $lastUpdate,
         string $dateCreated,
         array $workFields,
@@ -89,7 +89,7 @@ class Job
         return $this->description;
     }
 
-    public function getClosedDuration(): int
+    public function getClosedDuration(): ?int
     {
         return $this->closedDuration;
     }

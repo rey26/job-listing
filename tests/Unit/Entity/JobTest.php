@@ -73,7 +73,7 @@ final class JobTest extends TestCase
             true,
             'Test title',
             'Test description',
-            12345,
+            null,
             '2022-10-15 12:00:00',
             '2022-10-01 12:00:00',
             [new WorkField(1, 'Test work'), new WorkField(2, 'Test work 1')],
@@ -90,7 +90,7 @@ final class JobTest extends TestCase
         $this->assertTrue($job->isActive());
         $this->assertEquals('Test title', $job->getTitle());
         $this->assertEquals('Test description', $job->getDescription());
-        $this->assertEquals(12345, $job->getClosedDuration());
+        $this->assertNull($job->getClosedDuration());
         $this->assertEquals('2022-10-15 12:00:00', $job->getLastUpdate());
         $this->assertEquals('2022-10-01 12:00:00', $job->getDateCreated());
         $this->assertCount(2, $job->getWorkFields());
