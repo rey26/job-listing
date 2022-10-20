@@ -15,5 +15,11 @@ framework:
         #app: cache.adapter.apcu
 
         # Namespaced pools use the above "app" backend by default
-        #pools:
-            #my.dedicated.cache: null
+        # Set the directory we want our cache to be stored in
+        directory: '%kernel.project_dir%/cache'
+
+        # Next we create our cache pool and set it to store on the file system
+        pools:
+            recruitis.cache:
+                adapter: cache.adapter.filesystem
+                tags: true  # Make sure our pool supports tagging
