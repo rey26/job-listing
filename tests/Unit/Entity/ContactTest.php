@@ -10,11 +10,11 @@ class ContactTest extends TestCase
 {
     public function testContactWithBasicDataCreated(): void
     {
-        $contact = new Contact('Test name', 'test@example.com', '+4219234', null);
+        $contact = new Contact('Test name', 'test@example.com', null, null);
 
         $this->assertEquals('Test name', $contact->getName());
         $this->assertEquals('test@example.com', $contact->getEmail());
-        $this->assertEquals('+4219234', $contact->getPhone());
+        $this->assertNull($contact->getPhone());
         $this->assertNull($contact->getEmployee());
     }
 

@@ -34,7 +34,7 @@ final class JobTest extends TestCase
             [new Salary(20.50, 26.50, 'EUR', 'hour', true)],
             [new Employment(1, 'Test employment')],
             new Personalist(1, 'Test Personalist'),
-            new Contact('Contact', 'test@test.com', '+4210123', null)
+            new Contact('Contact', 'test@test.com', null, null)
         );
 
         $this->assertEquals('1', $job->getJobId());
