@@ -12,7 +12,7 @@ class Employee
     private string $name;
     private ?string $surname;
     private string $email;
-    private string $photoUrl;
+    private ?string $photoUrl;
     private ?string $phone;
     private ?string $linkedin;
 
@@ -21,7 +21,7 @@ class Employee
         string $name,
         ?string $surname,
         string $email,
-        string $photoUrl,
+        ?string $photoUrl,
         ?string $phone,
         ?string $linkedin
     ) {
@@ -54,7 +54,7 @@ class Employee
         return $this->email;
     }
 
-    public function getPhotoUrl(): string
+    public function getPhotoUrl(): ?string
     {
         return $this->photoUrl;
     }
