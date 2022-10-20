@@ -33,9 +33,19 @@ class Salary
         return $this->min;
     }
 
+    public function getMinWithCurrency(): string
+    {
+        return $this->min . ' ' . $this->currency;
+    }
+
     public function getMax(): float
     {
         return $this->max;
+    }
+
+    public function getMaxWithCurrency(): string
+    {
+        return $this->max . ' ' . $this->currency;
     }
 
     public function getCurrency(): string

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>
+                    Job ID
+                </th>
+                <th>
+                    Public ID
+                </th>
+                <th>
+                    Draft
+                </th>
+                <th>
+                    Active
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Last update
+                </th>
+                <th>
+                    Salary
+                </th>
+            </tr>
+            {% for job in jobs %}
+                <tr>
+                    <td>
+                        {{ job.jobId }}
+                    </td>
+                    <td>
+                        {{ job.publicId }}
+                    </td>
+                    <td>
+                        {{ job.isDraft() ? 'yes' : 'no' }}
+                    </td>
+                    <td>
+                        {{ job.isActive() ? 'yes' : 'no' }}
+                    </td>
+                    <td>
+                        {{ job.title }}
+                    </td>
+                    <td>
+                        {{ job.lastUpdate }}
+                    </td>
+                    <td>
+                        <ul>
+                            {% for salary in job.salary %}
+                                {% if salary.isVisible() %}
+                                    <li>
+                                        {{ salary.unit }}
+                                        <ul>
+                                            {% if salary.min > 0 %}
+                                                <li>
+                                                    from: {{ salary.minWithCurrency}}
+                                                </li>
+                                            {% endif %}
+                                            {% if salary.max > 0 %}
+                                                <li>
+                                                    up to: {{ salary.maxWithCurrency }}
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
