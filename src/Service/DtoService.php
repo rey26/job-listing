@@ -39,7 +39,7 @@ class DtoService
                 $this->getWorkFields($jobData['workfields']),
                 $this->getEducation($jobData['education']),
                 $this->getSalaries($jobData['salary']),
-                $this->getEmployments($jobData['employment']),
+                $this->getEmployment($jobData['employment']),
                 $this->getPersonalist($jobData['personalist']),
                 $this->getContact($jobData['contact'])
             );
@@ -64,13 +64,16 @@ class DtoService
     }
 
     /**
-     * Education was described as array of object in API documentation
+     * Education was described as array of object in API documentation, so I kept it as an array for better scalability
      */
     public function getEducation(array $education): array
     {
         return [new Education($education['id'], $education['name'])];
     }
 
+    /**
+     * Education was described as array of object in API documentation, so I kept it as an array for scalability
+     */
     public function getSalaries(?array $salary): array
     {
         if ($salary === null) {
@@ -88,7 +91,7 @@ class DtoService
     /**
      * Employment was described as array of object in API documentation
      */
-    public function getEmployments(array $employment): Employment
+    public function getEmployment(array $employment): Employment
     {
         return new Employment($employment['id'], $employment['name']);
     }
