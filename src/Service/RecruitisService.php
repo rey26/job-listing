@@ -20,11 +20,16 @@ class RecruitisService
         ]);
     }
 
-    public function retrieveJobs(): array
+    public function retrieveJobs(int $page): array
     {
-        $response = $this->client->request('GET', 'api2/jobs');
+        $response = $this->client->request('GET', 'api2/jobs', ['query' => ['page' => $page]]);
         $jobData = json_decode($response->getContent(), true);
 
-        return $jobData;
+        return [
+            'code' => $jobData['meta']['code'],
+            'jobs' => $jobData['payload'],
+            'page' => ceil(($jobData['meta']['entries_from'] - 1) / $jobData['meta']['entries_sum']) + 1,
+            'totalPages' => ceil($jobData['meta']['entries_total'] / $jobData['meta']['entries_sum']),
+        ];
     }
 }

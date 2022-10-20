@@ -16,8 +16,8 @@ class RecruitisServiceTest extends KernelTestCase
         /** @var RecruitisService $recruitisService */
         $recruitisService = $container->get(RecruitisService::class);
 
-        $response = $recruitisService->retrieveJobs();
+        $response = $recruitisService->retrieveJobs(1);
 
-        $this->assertEquals('api.found', $response['meta']['code']);
+        $this->assertEquals('api.found', $response['code']);
     }
 }

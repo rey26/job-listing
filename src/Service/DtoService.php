@@ -20,12 +20,12 @@ class DtoService
         $this->recruitisService = $recruitisService;
     }
 
-    public function getJobList(): array
+    public function getJobList(int $page): array
     {
         $jobList = [];
-        $responseData = $this->recruitisService->retrieveJobs();
+        $responseData = $this->recruitisService->retrieveJobs($page);
 
-        foreach ($responseData['payload'] as $jobData) {
+        foreach ($responseData['jobs'] as $jobData) {
             $jobList[] = new Job(
                 $jobData['job_id'],
                 $jobData['public_id'],
@@ -45,7 +45,11 @@ class DtoService
             );
         }
 
-        return $jobList;
+        return [
+            'jobs' => $jobList,
+            'page' => $responseData['page'],
+            'totalPages' => $responseData['totalPages'],
+        ];
     }
 
     public function getWorkFields(array $workFieldsData): array

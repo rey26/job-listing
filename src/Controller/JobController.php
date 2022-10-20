@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\DtoService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Throwable;
@@ -15,12 +16,19 @@ use Throwable;
 class JobController extends AbstractController
 {
     #[Route('/')]
-    public function index(DtoService $dtoService, LoggerInterface $logger)
+    public function index(DtoService $dtoService, Request $request, LoggerInterface $logger)
     {
         try {
-            return $this->render('job/list.html.twig', ['jobs' => $dtoService->getJobList()]);
+            $jobData = $dtoService->getJobList($request->get('page', 1));
+
+            return $this->render('job/list.html.twig', [
+                'jobs' => $jobData['jobs'],
+                'page' => $jobData['page'],
+                'totalPages' => $jobData['totalPages'],
+            ]);
         } catch (Throwable $t) {
             $logger->error($t->getMessage());
+            dd($t);
 
             return new Response('An error ocurred, try again later', 500);
         }

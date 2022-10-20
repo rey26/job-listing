@@ -73,6 +73,11 @@
                 </tr>
             {% endfor %}
         </table>
+        {% include 'partials/pagination.html.twig' with {
+            currentPage: page,
+            lastPage: totalPages,
+            showAlwaysFirstAndLast: true
+        } only %}
     </div>
 
 {% endblock %}
