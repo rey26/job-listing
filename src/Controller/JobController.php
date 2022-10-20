@@ -28,7 +28,6 @@ class JobController extends AbstractController
             ]);
         } catch (Throwable $t) {
             $logger->error($t->getMessage());
-            dd($t);
 
             return new Response('An error ocurred, try again later', 500);
         }

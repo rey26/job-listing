@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Exception\NoJobsFoundException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -25,11 +26,19 @@ class RecruitisService
         $response = $this->client->request('GET', 'api2/jobs', ['query' => ['page' => $page]]);
         $jobData = json_decode($response->getContent(), true);
 
+        if ($jobData['meta']['code'] === 'api.response.null') {
+            throw new NoJobsFoundException('No jobs were found, try again later');
+        }
+
         return [
             'code' => $jobData['meta']['code'],
             'jobs' => $jobData['payload'],
-            'page' => ceil(($jobData['meta']['entries_from'] - 1) / $jobData['meta']['entries_sum']) + 1,
-            'totalPages' => ceil($jobData['meta']['entries_total'] / $jobData['meta']['entries_sum']),
+            'page' => (int)floor(($jobData['meta']['entries_from'] - 1) / $jobData['meta']['entries_sum'] + 1),
+            'totalPages' => (int)ceil(
+                $jobData['meta']['entries_total'] / (
+                    $jobData['meta']['entries_to'] - $jobData['meta']['entries_from'] + 1
+                )
+            ),
         ];
     }
 }
