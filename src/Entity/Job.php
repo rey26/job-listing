@@ -21,7 +21,7 @@ class Job
     private array $workFields;
     private array $education;
     private array $salary;
-    private array $employment;
+    private Employment $employment;
     private Personalist $personalist;
     private Contact $contact;
 
@@ -38,7 +38,7 @@ class Job
         array $workFields,
         array $education,
         array $salary,
-        array $employment,
+        Employment $employment,
         Personalist $personalist,
         Contact $contact
     ) {
@@ -119,7 +119,7 @@ class Job
         return $this->salary;
     }
 
-    public function getEmployment(): array
+    public function getEmployment(): Employment
     {
         return $this->employment;
     }

@@ -32,7 +32,7 @@ final class JobTest extends TestCase
             [new WorkField(1, 'Test work'), new WorkField(2, 'Test work 1')],
             [new Education(1, 'Test Education')],
             [new Salary(20.50, 26.50, 'EUR', 'hour', true)],
-            [new Employment(1, 'Test employment')],
+            new Employment(1, 'Test employment'),
             new Personalist(1, 'Test Personalist'),
             new Contact('Contact', 'test@test.com', null, null)
         );
@@ -49,6 +49,7 @@ final class JobTest extends TestCase
         $this->assertCount(2, $job->getWorkFields());
         $this->assertCount(1, $job->getEducation());
         $this->assertCount(1, $job->getSalary());
+        $this->assertInstanceOf(Employment::class, $job->getEmployment());
         $this->assertInstanceOf(Personalist::class, $job->getPersonalist());
         $this->assertInstanceOf(Contact::class, $job->getContact());
         $this->assertNull($job->getContact()->getEmployee());
@@ -79,7 +80,7 @@ final class JobTest extends TestCase
             [new WorkField(1, 'Test work'), new WorkField(2, 'Test work 1')],
             [new Education(1, 'Test Education')],
             [new Salary(20.50, 26.50, 'EUR', 'hour', true)],
-            [new Employment(1, 'Test employment')],
+            new Employment(1, 'Test employment'),
             new Personalist(1, 'Test Personalist'),
             new Contact('Contact', 'test@test.com', '+4210123', $employee)
         );
@@ -96,6 +97,7 @@ final class JobTest extends TestCase
         $this->assertCount(2, $job->getWorkFields());
         $this->assertCount(1, $job->getEducation());
         $this->assertCount(1, $job->getSalary());
+        $this->assertInstanceOf(Employment::class, $job->getEmployment());
         $this->assertInstanceOf(Personalist::class, $job->getPersonalist());
         $this->assertInstanceOf(Contact::class, $job->getContact());
         $this->assertSame($employee, $job->getContact()->getEmployee());

@@ -84,9 +84,9 @@ class DtoService
     /**
      * Employment was described as array of object in API documentation
      */
-    public function getEmployments(array $employment): array
+    public function getEmployments(array $employment): Employment
     {
-        return [new Employment($employment['id'], $employment['name'])];
+        return new Employment($employment['id'], $employment['name']);
     }
 
     public function getPersonalist(array $personalistData): Personalist
