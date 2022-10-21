@@ -42,11 +42,11 @@ class RecruitisService
         return [
             'code' => $jobData['meta']['code'],
             'jobs' => $jobData['payload'],
-            'page' => (int)floor(($jobData['meta']['entries_from'] - 1) / $jobData['meta']['entries_sum'] + 1),
-            'totalPages' => (int)ceil(
-                $jobData['meta']['entries_total'] / (
-                    $jobData['meta']['entries_to'] - $jobData['meta']['entries_from'] + 1
-                )
+            'page' => $this->getPage($jobData['meta']['entries_from'], $jobData['meta']['entries_sum']),
+            'totalPages' => $this->getTotalPages(
+                $jobData['meta']['entries_total'],
+                $jobData['meta']['entries_from'],
+                $jobData['meta']['entries_to']
             ),
         ];
     }
@@ -62,5 +62,15 @@ class RecruitisService
 
             return $response;
         });
+    }
+
+    private function getPage(int $entriesFrom, int $entriesSum): int
+    {
+        return floor(($entriesFrom - 1) / $entriesSum + 1);
+    }
+
+    private function getTotalPages(int $entriesTotal, int $entriesFrom, int $entriesTo): int
+    {
+        return ceil($entriesTotal / ($entriesTo - $entriesFrom + 1));
     }
 }
